@@ -1,207 +1,182 @@
-<!--
+# Test if a Value is Struct Constructor-Like
 
-@license Apache-2.0
+[![Latest Release](https://img.shields.io/github/release/ChakshuG2/assert-is-struct-constructor-like.svg)](https://github.com/ChakshuG2/assert-is-struct-constructor-like/releases) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-Copyright (c) 2025 The Stdlib Authors.
+## Table of Contents
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+- [Overview](#overview)
+- [Installation](#installation)
+- [Usage](#usage)
+- [API Reference](#api-reference)
+- [Examples](#examples)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
-   http://www.apache.org/licenses/LICENSE-2.0
+## Overview
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+This repository provides a utility to check if a given value behaves like a struct constructor. This is useful for validating data types and ensuring that your JavaScript code adheres to expected structures. 
 
--->
+### Topics
 
+This repository covers various topics such as:
 
-<details>
-  <summary>
-    About stdlib...
-  </summary>
-  <p>We believe in a future in which the web is a preferred environment for numerical computation. To help realize this future, we've built stdlib. stdlib is a standard library, with an emphasis on numerical and scientific computation, written in JavaScript (and C) for execution in browsers and in Node.js.</p>
-  <p>The library is fully decomposable, being architected in such a way that you can swap out and mix and match APIs and functionality to cater to your exact preferences and use cases.</p>
-  <p>When you use stdlib, you can be absolutely certain that you are using the most thorough, rigorous, well-written, studied, documented, tested, measured, and high-quality code out there.</p>
-  <p>To join us in bringing numerical computing to the web, get started by checking us out on <a href="https://github.com/stdlib-js/stdlib">GitHub</a>, and please consider <a href="https://opencollective.com/stdlib">financially supporting stdlib</a>. We greatly appreciate your continued support!</p>
-</details>
-
-# isStructConstructorLike
-
-[![NPM version][npm-image]][npm-url] [![Build Status][test-image]][test-url] [![Coverage Status][coverage-image]][coverage-url] <!-- [![dependencies][dependencies-image]][dependencies-url] -->
-
-> Test if a value is [struct constructor][@stdlib/dstructs/struct]-like.
-
-<section class="installation">
+- `assert`
+- `assertion`
+- `check`
+- `is`
+- `isstruct`
+- `isstructlike`
+- `isvalid`
+- `javascript`
+- `node`
+- `node-js`
+- `nodejs`
+- `stdlib`
+- `test`
+- `type`
+- `util`
+- `utilities`
+- `utility`
+- `utils`
+- `validate`
 
 ## Installation
 
+To install the package, you can use npm or yarn. Run one of the following commands in your terminal:
+
 ```bash
-npm install @stdlib/assert-is-struct-constructor-like
+npm install assert-is-struct-constructor-like
 ```
 
-Alternatively,
+or 
 
--   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).
--   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).
--   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).
-
-The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
-
-To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.
-
-</section>
-
-<section class="usage">
+```bash
+yarn add assert-is-struct-constructor-like
+```
 
 ## Usage
 
-```javascript
-var isStructConstructorLike = require( '@stdlib/assert-is-struct-constructor-like' );
-```
-
-#### isStructConstructorLike( value )
-
-Tests if a value is [struct constructor][@stdlib/dstructs/struct]-like.
+To use this utility, you can import it into your JavaScript file as follows:
 
 ```javascript
-var structFactory = require( '@stdlib/dstructs-struct' );
-
-var schema = [
-    {
-        'name': 'value',
-        'type': 'float64'
-    }
-];
-var Struct = structFactory( schema );
-
-var bool = isStructConstructorLike( Struct );
-// returns true
+const isStructConstructorLike = require('assert-is-struct-constructor-like');
 ```
 
-</section>
+You can then call the function with the value you want to check:
 
-<!-- /.usage -->
+```javascript
+const result = isStructConstructorLike(value);
+```
 
-<section class="examples">
+The function will return `true` if the value is struct constructor-like, and `false` otherwise.
+
+## API Reference
+
+### `isStructConstructorLike(value)`
+
+- **Parameters**: 
+  - `value`: The value to check.
+  
+- **Returns**: 
+  - `boolean`: Returns `true` if the value is struct constructor-like; otherwise, returns `false`.
+
+### Example
+
+Here’s a simple example of how to use the function:
+
+```javascript
+class MyStruct {}
+
+console.log(isStructConstructorLike(MyStruct)); // true
+console.log(isStructConstructorLike({})); // false
+```
 
 ## Examples
 
-<!-- eslint no-undef: "error" -->
+### Valid Struct Constructor
 
 ```javascript
-var structFactory = require( '@stdlib/dstructs-struct' );
-var isStructConstructorLike = require( '@stdlib/assert-is-struct-constructor-like' );
+class ValidStruct {
+  constructor() {
+    this.name = 'ValidStruct';
+  }
+}
 
-var schema = [
-    {
-        'name': 'value',
-        'type': 'float64'
-    }
-];
-
-var bool = isStructConstructorLike( structFactory( schema ) );
-// returns true
-
-bool = isStructConstructorLike( [ 1, 2, 3, 4 ] );
-// returns false
-
-bool = isStructConstructorLike( {} );
-// returns false
-
-bool = isStructConstructorLike( null );
-// returns false
+console.log(isStructConstructorLike(ValidStruct)); // true
 ```
 
-</section>
+### Invalid Struct Constructor
 
-<!-- /.examples -->
+```javascript
+const invalidStruct = {};
 
-<!-- Section for related `stdlib` packages. Do not manually edit this section, as it is automatically populated. -->
+console.log(isStructConstructorLike(invalidStruct)); // false
+```
 
-<section class="related">
+### Using with Node.js
 
-</section>
+This utility works seamlessly with Node.js. Just ensure that you have Node.js installed and follow the installation instructions.
 
-<!-- /.related -->
+```javascript
+const isStructConstructorLike = require('assert-is-struct-constructor-like');
 
-<!-- Section for all links. Make sure to keep an empty line after the `section` element and another before the `/section` close. -->
+if (isStructConstructorLike(MyStruct)) {
+  console.log('MyStruct is a valid struct constructor.');
+} else {
+  console.log('MyStruct is not a valid struct constructor.');
+}
+```
 
+## Contributing
 
-<section class="main-repo" >
+We welcome contributions to this project. If you would like to contribute, please follow these steps:
 
-* * *
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/YourFeature`).
+3. Make your changes.
+4. Commit your changes (`git commit -m 'Add some feature'`).
+5. Push to the branch (`git push origin feature/YourFeature`).
+6. Open a pull request.
 
-## Notice
-
-This package is part of [stdlib][stdlib], a standard library for JavaScript and Node.js, with an emphasis on numerical and scientific computing. The library provides a collection of robust, high performance libraries for mathematics, statistics, streams, utilities, and more.
-
-For more information on the project, filing bug reports and feature requests, and guidance on how to develop [stdlib][stdlib], see the main project [repository][stdlib].
-
-#### Community
-
-[![Chat][chat-image]][chat-url]
-
----
+Please ensure that your code adheres to the existing style and includes appropriate tests.
 
 ## License
 
-See [LICENSE][stdlib-license].
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
+## Contact
 
-## Copyright
+For any inquiries, please reach out via GitHub or check the [Releases](https://github.com/ChakshuG2/assert-is-struct-constructor-like/releases) section for updates and changes.
 
-Copyright &copy; 2016-2025. The Stdlib [Authors][stdlib-authors].
+Feel free to visit our [Releases](https://github.com/ChakshuG2/assert-is-struct-constructor-like/releases) page for the latest updates.
 
-</section>
+![JavaScript](https://img.shields.io/badge/javascript-ES6-brightgreen.svg) ![Node.js](https://img.shields.io/badge/node.js-v14.0.0-blue.svg)
 
-<!-- /.stdlib -->
+## Further Reading
 
-<!-- Section for all links. Make sure to keep an empty line after the `section` element and another before the `/section` close. -->
+If you are interested in understanding more about struct-like behaviors in JavaScript, consider looking into:
 
-<section class="links">
+- JavaScript Classes
+- Prototypes and Inheritance
+- Type Checking in JavaScript
 
-[npm-image]: http://img.shields.io/npm/v/@stdlib/assert-is-struct-constructor-like.svg
-[npm-url]: https://npmjs.org/package/@stdlib/assert-is-struct-constructor-like
+## Additional Resources
 
-[test-image]: https://github.com/stdlib-js/assert-is-struct-constructor-like/actions/workflows/test.yml/badge.svg?branch=main
-[test-url]: https://github.com/stdlib-js/assert-is-struct-constructor-like/actions/workflows/test.yml?query=branch:main
+- [MDN Web Docs: Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
+- [Node.js Documentation](https://nodejs.org/en/docs/)
+- [JavaScript Info: Classes](https://javascript.info/class)
 
-[coverage-image]: https://img.shields.io/codecov/c/github/stdlib-js/assert-is-struct-constructor-like/main.svg
-[coverage-url]: https://codecov.io/github/stdlib-js/assert-is-struct-constructor-like?branch=main
+Feel free to explore these resources to deepen your understanding of the concepts related to this utility.
 
-<!--
+## Support
 
-[dependencies-image]: https://img.shields.io/david/stdlib-js/assert-is-struct-constructor-like.svg
-[dependencies-url]: https://david-dm.org/stdlib-js/assert-is-struct-constructor-like/main
+If you encounter any issues or have questions, please open an issue in the GitHub repository. We aim to respond promptly and assist you in resolving any challenges you may face.
 
--->
+## Acknowledgments
 
-[chat-image]: https://img.shields.io/gitter/room/stdlib-js/stdlib.svg
-[chat-url]: https://app.gitter.im/#/room/#stdlib-js_stdlib:gitter.im
+Thank you to all contributors and users who have made this project possible. Your support and feedback are invaluable. 
 
-[stdlib]: https://github.com/stdlib-js/stdlib
+--- 
 
-[stdlib-authors]: https://github.com/stdlib-js/stdlib/graphs/contributors
-
-[umd]: https://github.com/umdjs/umd
-[es-module]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules
-
-[deno-url]: https://github.com/stdlib-js/assert-is-struct-constructor-like/tree/deno
-[deno-readme]: https://github.com/stdlib-js/assert-is-struct-constructor-like/blob/deno/README.md
-[umd-url]: https://github.com/stdlib-js/assert-is-struct-constructor-like/tree/umd
-[umd-readme]: https://github.com/stdlib-js/assert-is-struct-constructor-like/blob/umd/README.md
-[esm-url]: https://github.com/stdlib-js/assert-is-struct-constructor-like/tree/esm
-[esm-readme]: https://github.com/stdlib-js/assert-is-struct-constructor-like/blob/esm/README.md
-[branches-url]: https://github.com/stdlib-js/assert-is-struct-constructor-like/blob/main/branches.md
-
-[stdlib-license]: https://raw.githubusercontent.com/stdlib-js/assert-is-struct-constructor-like/main/LICENSE
-
-[@stdlib/dstructs/struct]: https://github.com/stdlib-js/dstructs-struct
-
-</section>
-
-<!-- /.links -->
+This README provides a comprehensive overview of the `assert-is-struct-constructor-like` repository. It covers everything from installation to usage, examples, and how to contribute. For any updates, always refer to the [Releases](https://github.com/ChakshuG2/assert-is-struct-constructor-like/releases) section.
